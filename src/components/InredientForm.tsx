@@ -1,0 +1,138 @@
+import * as Form from "@radix-ui/react-form";
+import { Box, Button, Card, Flex, Heading, Spinner, Text, TextField } from "@radix-ui/themes";
+import React, { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { supabase } from "../utils/supabase";
+
+const INITIAL_STATE = {
+  nombre: "",
+  cantidad: "",
+};
+
+const InredientForm = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState(INITIAL_STATE);
+  const [loading, setLoading] = useState(false);
+
+  const validFormData = () => {
+    const { nombre, cantidad } = formData;
+    if (nombre.trim().length === 0 || nombre.match(/[\D+ ]/i) === null) return false;
+    if (cantidad.match(/\d+/) === null || +cantidad <= 0) return false;
+    return true;
+  };
+
+  const updateTable = async () => {
+    const parsedFormData = {
+      nombre: formData.nombre.trim(),
+      cantidad: formData.cantidad,
+    };
+
+    try {
+      const { error } = await supabase.from("ingredients").insert(parsedFormData);
+      if (error) {
+        console.log({ error });
+      } else {
+        setFormData(INITIAL_STATE);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    if (validFormData()) {
+      await updateTable();
+    }
+    setLoading(false);
+  };
+
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = target;
+    setFormData((data) => ({ ...data, [name]: value }));
+  };
+
+  return (
+    <Flex align={"center"} justify={"center"} flexGrow={"1"} direction={"column"} height={"100%"}>
+      <Box style={{ background: "red" }}>
+        <Card>
+          <Heading>Agregar ingrediente</Heading>
+          <Form.Root className="FormRoot" onSubmit={onSubmit}>
+            <Form.Field className="FormField" name="nombre">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Form.Label className="FormLabel">Ingrediente</Form.Label>
+              </div>
+              <Form.Control asChild>
+                <TextField.Root
+                  required
+                  type="text"
+                  onChange={handleChange}
+                  value={formData.nombre}
+                />
+              </Form.Control>
+              <Form.Message match="valueMissing">
+                <Text size="1" color="red">
+                  Dale poné el ingrediente hippie
+                </Text>
+              </Form.Message>
+            </Form.Field>
+            <Form.Field className="FormField" name="cantidad">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Form.Label className="FormLabel">Cantidad</Form.Label>
+              </div>
+              <Form.Control asChild>
+                <TextField.Root
+                  required
+                  type="number"
+                  onChange={handleChange}
+                  value={formData.cantidad}
+                />
+              </Form.Control>
+              <Form.Message match="valueMissing">
+                <Text size="1" color="red">
+                  Falta la cantidad
+                </Text>
+              </Form.Message>
+            </Form.Field>
+            <Form.Submit asChild>
+              <Box my="2">
+                <Button style={{ width: "100%" }} type="submit" disabled={loading}>
+                  {loading && <Spinner loading />}
+                  Crear
+                </Button>
+              </Box>
+            </Form.Submit>
+          </Form.Root>
+          <Box my="2">
+            <Button
+              style={{ width: "100%" }}
+              type="button"
+              variant="soft"
+              disabled={loading}
+              onClick={() => navigate("/")}
+            >
+              {loading && <Spinner loading />}
+              Volver
+            </Button>
+          </Box>
+        </Card>
+      </Box>
+    </Flex>
+  );
+};
+
+export default InredientForm;
