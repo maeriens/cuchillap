@@ -1,8 +1,8 @@
 import { Box, Container, Flex, Tabs, Text, TextField } from "@radix-ui/themes";
 import { ChangeEvent, useState } from "react";
 
+import { IngredientsTable } from "../components/IngredientsTable/IngredientsTable";
 import { useDebounce } from "../hooks/useDebounceValue";
-import { IngredientsTable } from "./IngredientsTable";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +14,9 @@ function Home() {
 
   return (
     <Container>
+      <Box position="sticky" top="0" style={{ zIndex: 2, background: "#FFF" }} pb="4">
+        <TextField.Root placeholder="Buscá si te pinta…" radius="large" onChange={handleSearch} />
+      </Box>
       <Flex direction="column">
         <IngredientsTable searchTerm={debouncedTerm} />
       </Flex>

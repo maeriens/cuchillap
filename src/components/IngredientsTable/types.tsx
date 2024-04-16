@@ -1,4 +1,8 @@
-type Ingrediente = {
+export type TableProps = {
+  searchTerm: string;
+};
+
+export type Ingrediente = {
   nombre: string;
   cantidad: number;
 };

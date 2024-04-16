@@ -1,14 +1,11 @@
 import { Button, Flex, Table, Text } from "@radix-ui/themes";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-import ReactLoading from "react-loading";
 
-import { IngredienteDB } from "../hooks/types";
-import { supabase } from "../utils/supabase";
-
-type TableProps = {
-  searchTerm: string;
-};
+import { supabase } from "../../utils/supabase";
+import Loading from "../Loading";
+import IngredientRow from "./IngredientRow";
+import { IngredienteDB, TableProps } from "./types";
 
 export const IngredientsTable = ({ searchTerm }: TableProps) => {
   const [data, setData] = useState<IngredienteDB[]>([]);
@@ -36,11 +33,7 @@ export const IngredientsTable = ({ searchTerm }: TableProps) => {
   }, []);
 
   if (loading) {
-    return (
-      <Flex justify="center" py="5">
-        <ReactLoading type="spinningBubbles" color="black" />
-      </Flex>
-    );
+    return <Loading />;
   }
 
   if (error) {
@@ -72,11 +65,13 @@ export const IngredientsTable = ({ searchTerm }: TableProps) => {
 
       <Table.Body>
         {filteredData.map((row) => (
-          <Table.Row key={row.id}>
-            <Table.Cell className="upper">{row.nombre}</Table.Cell>
-            <Table.Cell>{row.cantidad}</Table.Cell>
-            <Table.Cell>{new Date(row.created_at).toLocaleDateString()}</Table.Cell>
-          </Table.Row>
+          <IngredientRow
+            key={row.id}
+            id={row.id}
+            nombre={row.nombre}
+            cantidad={row.cantidad}
+            created_at={row.created_at}
+          />
         ))}
       </Table.Body>
     </Table.Root>

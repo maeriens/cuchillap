@@ -24,7 +24,6 @@ const Admin = () => {
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
             providers={[]}
-            // showLinks={false}
             view="sign_in"
           />
         </Card>

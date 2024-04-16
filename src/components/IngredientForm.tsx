@@ -17,8 +17,8 @@ const InredientForm = () => {
 
   const validFormData = () => {
     const { nombre, cantidad } = formData;
-    if (nombre.trim().length === 0 || nombre.match(/[\D+ ]/i) === null) return false;
-    if (cantidad.match(/\d+/) === null || +cantidad <= 0) return false;
+    if (nombre.trim().length === 0 || RegExp(/\D+ /i).exec(nombre) === null) return false;
+    if (RegExp(/\d+/).exec(cantidad) === null || +cantidad <= 0) return false;
     return true;
   };
 
