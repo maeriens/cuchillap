@@ -2,6 +2,7 @@ import { Button, Flex, Table, Text } from "@radix-ui/themes";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
+import { INGREDIENTS_TABLE_NAME } from "../../utils/constants";
 import { supabase } from "../../utils/supabase";
 import Loading from "../Loading";
 import IngredientRow from "./IngredientRow";
@@ -10,20 +11,27 @@ import { IngredienteDB, TableProps } from "./types";
 export const IngredientsTable = ({ searchTerm }: TableProps) => {
   const [data, setData] = useState<IngredienteDB[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<PostgrestError | unknown>();
+  const [error, setError] = useState<PostgrestError | string>();
 
   const getData = async () => {
     setLoading(true);
-    setError(null);
+    setError(undefined);
     try {
-      const { error, data } = await supabase.from("ingredients").select();
+      const { error, data } = await supabase.from(INGREDIENTS_TABLE_NAME).select();
       if (error) {
         setError(error);
       } else {
         setData(data);
       }
     } catch (e) {
-      setError(e);
+      let error;
+      if (typeof e === "string") {
+        error = e.toUpperCase();
+      } else if (e instanceof Error) {
+        error = e.message;
+      }
+      console.error(error);
+      setError(error);
     }
     setLoading(false);
   };

@@ -3,6 +3,7 @@ import { Box, Button, Card, Flex, Heading, Spinner, Text, TextField } from "@rad
 import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { INGREDIENTS_TABLE_NAME } from "../utils/constants";
 import { supabase } from "../utils/supabase";
 
 const INITIAL_STATE = {
@@ -29,7 +30,7 @@ const InredientForm = () => {
     };
 
     try {
-      const { error } = await supabase.from("ingredients").insert(parsedFormData);
+      const { error } = await supabase.from(INGREDIENTS_TABLE_NAME).insert(parsedFormData);
       if (error) {
         console.log({ error });
       } else {
@@ -61,15 +62,9 @@ const InredientForm = () => {
           <Heading>Agregar ingrediente</Heading>
           <Form.Root className="FormRoot" onSubmit={onSubmit}>
             <Form.Field className="FormField" name="nombre">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                }}
-              >
+              <Flex align="baseline" justify="between">
                 <Form.Label className="FormLabel">Ingrediente</Form.Label>
-              </div>
+              </Flex>
               <Form.Control asChild>
                 <TextField.Root
                   required
@@ -85,15 +80,9 @@ const InredientForm = () => {
               </Form.Message>
             </Form.Field>
             <Form.Field className="FormField" name="cantidad">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                }}
-              >
+              <Flex align="baseline" justify="between">
                 <Form.Label className="FormLabel">Cantidad</Form.Label>
-              </div>
+              </Flex>
               <Form.Control asChild>
                 <TextField.Root
                   required
