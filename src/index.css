@@ -22,14 +22,6 @@ body {
   height: 100vh;
 }
 
-div.rt-Box {
-  border: 1px solid blue !important;
-}
-
-div.rt-Flex {
-  border: 1px solid green !important;
-}
-
 .upper {
   text-transform: capitalize;
 }
