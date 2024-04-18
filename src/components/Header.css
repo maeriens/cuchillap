@@ -1,0 +1,9 @@
+.header-flex {
+  align-items: baseline;
+}
+
+@media only screen and (max-width: 425px) {
+  .header-flex {
+    align-items: center;
+  }
+}

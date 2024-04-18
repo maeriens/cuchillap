@@ -1,10 +1,12 @@
+import "./Header.css";
+
 import { Container, Flex, Heading } from "@radix-ui/themes";
 
 const Header = () => {
   return (
     <header>
       <Container>
-        <Flex my="3" gap="4" align="baseline" justify="between">
+        <Flex my="3" gap="4" justify="between" className="header-flex">
           <Heading size="8">Cuchillapp</Heading>
           <Heading
             color="gray"
