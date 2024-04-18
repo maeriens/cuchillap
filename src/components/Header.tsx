@@ -4,9 +4,16 @@ const Header = () => {
   return (
     <header>
       <Container>
-        <Flex my="3" gap="4" align="baseline">
-          <Heading size="8">Cuchillo</Heading>
-          <Heading color="gray">
+        <Flex my="3" gap="4" align="baseline" justify="between">
+          <Heading size="8">Cuchillapp</Heading>
+          <Heading
+            color="gray"
+            size={{
+              initial: "2",
+              xs: "3",
+              sm: "5",
+            }}
+          >
             <em>O una lista de cosas que corté</em>
           </Heading>
         </Flex>

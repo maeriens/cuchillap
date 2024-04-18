@@ -5,7 +5,7 @@ import Header from "./components/Header";
 
 const App = ({ children }: PropsWithChildren) => {
   return (
-    <Flex direction="column">
+    <Flex direction="column" px="4">
       <Header />
       {children}
     </Flex>
