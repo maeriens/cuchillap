@@ -17,8 +17,8 @@ const Admin = () => {
 
   return (
     <Flex align={"center"} justify={"center"} flexGrow={"1"} direction={"column"} height={"100%"}>
-      <Box style={{ background: "red" }}>
-        <Card>
+      <Box>
+        <Card style={{ background: "#D4D4D4" }}>
           <Heading>Login</Heading>
           <Auth
             supabaseClient={supabase}
