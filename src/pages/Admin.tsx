@@ -1,35 +1,32 @@
-import { Box, Card, Flex, Heading } from "@radix-ui/themes";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useNavigate } from "react-router-dom";
+import { Session } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 
+import IngredientForm from "../components/IngredientForm";
+import Login from "../components/Login";
 import { supabase } from "../utils/supabase";
 
 const Admin = () => {
-  const navigate = useNavigate();
+  const [session, setSession] = useState<Session | null>(null);
 
-  supabase.auth.onAuthStateChange(async (event) => {
-    console.log(event);
-    if (event !== "SIGNED_OUT") {
-      navigate("/new");
-    }
-  });
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-  return (
-    <Flex align={"center"} justify={"center"} flexGrow={"1"} direction={"column"} height={"100%"}>
-      <Box>
-        <Card style={{ background: "#D4D4D4" }}>
-          <Heading>Login</Heading>
-          <Auth
-            supabaseClient={supabase}
-            appearance={{ theme: ThemeSupa }}
-            providers={[]}
-            view="sign_in"
-          />
-        </Card>
-      </Box>
-    </Flex>
-  );
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (!session) {
+    return <Login />;
+  } else {
+    return <IngredientForm />;
+  }
 };
 
 export default Admin;
