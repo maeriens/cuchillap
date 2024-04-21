@@ -1,6 +1,6 @@
 import { Table } from "@radix-ui/themes";
 
-import { IngredienteDB } from "./types";
+import { IngredienteDB } from "../../types/types";
 
 const IngredientRow = ({ name, amount, created_at }: IngredienteDB) => {
   return (
