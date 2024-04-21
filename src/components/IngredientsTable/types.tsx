@@ -3,8 +3,8 @@ export type TableProps = {
 };
 
 export type Ingrediente = {
-  nombre: string;
-  cantidad: number;
+  name: string;
+  amount: number;
 };
 
 export type IngredienteDB = Ingrediente & {

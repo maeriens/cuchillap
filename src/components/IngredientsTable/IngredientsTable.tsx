@@ -57,9 +57,7 @@ export const IngredientsTable = ({ searchTerm }: TableProps) => {
     );
   }
 
-  const filteredData = data.filter((r) =>
-    r.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = data.filter((r) => r.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <Table.Root size="3" variant="surface">
@@ -76,8 +74,8 @@ export const IngredientsTable = ({ searchTerm }: TableProps) => {
           <IngredientRow
             key={row.id}
             id={row.id}
-            nombre={row.nombre}
-            cantidad={row.cantidad}
+            name={row.name}
+            amount={row.amount}
             created_at={row.created_at}
           />
         ))}

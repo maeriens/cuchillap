@@ -7,8 +7,8 @@ import { INGREDIENTS_TABLE_NAME } from "../utils/constants";
 import { supabase } from "../utils/supabase";
 
 const INITIAL_STATE = {
-  nombre: "",
-  cantidad: "",
+  name: "",
+  amount: "",
 };
 
 const InredientForm = () => {
@@ -17,16 +17,16 @@ const InredientForm = () => {
   const [loading, setLoading] = useState(false);
 
   const validFormData = () => {
-    const { nombre, cantidad } = formData;
-    if (nombre.trim().length === 0 || RegExp(/[\D+ ]/i).exec(nombre) === null) return false;
-    if (RegExp(/\d+/).exec(cantidad) === null || +cantidad <= 0) return false;
+    const { name, amount } = formData;
+    if (name.trim().length === 0 || RegExp(/[\D+ ]/i).exec(name) === null) return false;
+    if (RegExp(/\d+/).exec(amount) === null || +amount <= 0) return false;
     return true;
   };
 
   const updateTable = async () => {
     const parsedFormData = {
-      nombre: formData.nombre.trim(),
-      cantidad: formData.cantidad,
+      name: formData.name.trim(),
+      amount: formData.amount,
     };
 
     try {
@@ -61,7 +61,7 @@ const InredientForm = () => {
         <Card style={{ background: "#D4D4D4" }}>
           <Heading>Agregar ingrediente</Heading>
           <Form.Root className="FormRoot" onSubmit={onSubmit}>
-            <Form.Field className="FormField" name="nombre">
+            <Form.Field className="FormField" name="name">
               <Flex align="baseline" justify="between">
                 <Form.Label className="FormLabel">Ingrediente</Form.Label>
               </Flex>
@@ -70,7 +70,7 @@ const InredientForm = () => {
                   required
                   type="text"
                   onChange={handleChange}
-                  value={formData.nombre}
+                  value={formData.name}
                 />
               </Form.Control>
               <Form.Message match="valueMissing">
@@ -79,21 +79,21 @@ const InredientForm = () => {
                 </Text>
               </Form.Message>
             </Form.Field>
-            <Form.Field className="FormField" name="cantidad">
+            <Form.Field className="FormField" name="amount">
               <Flex align="baseline" justify="between">
-                <Form.Label className="FormLabel">Cantidad</Form.Label>
+                <Form.Label className="FormLabel">amount</Form.Label>
               </Flex>
               <Form.Control asChild>
                 <TextField.Root
                   required
                   type="number"
                   onChange={handleChange}
-                  value={formData.cantidad}
+                  value={formData.amount}
                 />
               </Form.Control>
               <Form.Message match="valueMissing">
                 <Text size="1" color="red">
-                  Falta la cantidad
+                  Falta la amount
                 </Text>
               </Form.Message>
             </Form.Field>
