@@ -22,6 +22,6 @@ body {
   height: 100vh;
 }
 
-.upper {
+.capitalize {
   text-transform: capitalize;
 }
