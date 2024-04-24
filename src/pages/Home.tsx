@@ -33,7 +33,7 @@ function Home() {
         <Tabs.List>
           {TABS_DATA.map(({ name }) => (
             <Tabs.Trigger value={name} className="capitalize" key={name}>
-              {name}
+              {name.toUpperCase()}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
