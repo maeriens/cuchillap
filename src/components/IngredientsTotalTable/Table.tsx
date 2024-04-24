@@ -34,12 +34,13 @@ export const IngredientsTotalTable = ({ searchTerm }: TableProps) => {
         <Table.Row>
           <Table.ColumnHeaderCell>Ingrediente</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell>Total</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell>Último</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 
       <Table.Body>
         {filteredData.map((row) => (
-          <Row key={row.id} name={row.name} sum={row.sum} />
+          <Row key={row.id} name={row.name} total={row.total} most_recent={row.most_recent} />
         ))}
       </Table.Body>
     </Table.Root>

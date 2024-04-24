@@ -14,7 +14,8 @@ export type IngredienteDB = Ingrediente & {
 
 export type Totals = {
   name: string;
-  sum: number;
+  total: number;
+  most_recent: string;
 };
 
 export type TotalsDB = Totals & {
