@@ -25,7 +25,7 @@ const InredientForm = () => {
 
   const updateTable = async () => {
     const parsedFormData = {
-      name: formData.name.trim(),
+      name: formData.name.trim().toLowerCase(),
       amount: formData.amount,
     };
 
