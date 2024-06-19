@@ -1,15 +1,13 @@
 import { Flex } from "@radix-ui/themes";
-import { PropsWithChildren } from "react";
+import { ReactNode } from "react";
 
 import Header from "./components/Header";
 
-const App = ({ children }: PropsWithChildren) => {
-  return (
-    <Flex direction="column" px="4">
-      <Header />
-      {children}
-    </Flex>
-  );
-};
+const App = ({ children }: { children: ReactNode }) => (
+  <Flex direction="column" px="4">
+    <Header />
+    {children}
+  </Flex>
+);
 
 export default App;

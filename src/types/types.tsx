@@ -2,7 +2,7 @@ export type TableProps = {
   searchTerm: string;
 };
 
-export type Ingrediente = {
+type Ingrediente = {
   name: string;
   amount: number;
 };

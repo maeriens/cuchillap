@@ -25,3 +25,11 @@ body {
 .capitalize {
   text-transform: capitalize;
 }
+
+.offgrey-background {
+  background-color: #d4d4d4;
+}
+
+.fullWidth {
+  width: 100%;
+}

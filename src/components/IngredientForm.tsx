@@ -58,7 +58,7 @@ const InredientForm = () => {
   return (
     <Flex align={"center"} justify={"center"} flexGrow={"1"} direction={"column"} height={"100%"}>
       <Box>
-        <Card style={{ background: "#D4D4D4" }}>
+        <Card className="offgrey-background">
           <Heading>Agregar ingrediente</Heading>
           <Form.Root className="FormRoot" onSubmit={onSubmit}>
             <Form.Field className="FormField" name="name">
@@ -100,7 +100,7 @@ const InredientForm = () => {
             <Form.Submit asChild>
               <Box my="2">
                 <Button
-                  style={{ width: "100%" }}
+                  className="fullWidth"
                   type="submit"
                   disabled={loading || !formData.name || !formData.amount}
                 >
@@ -112,7 +112,7 @@ const InredientForm = () => {
           </Form.Root>
           <Box my="2">
             <Button
-              style={{ width: "100%" }}
+              className="fullWidth"
               type="button"
               color="amber"
               variant="soft"
