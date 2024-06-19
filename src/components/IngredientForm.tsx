@@ -18,7 +18,7 @@ const InredientForm = () => {
 
   const validFormData = () => {
     const { name, amount } = formData;
-    if (name.trim().length === 0 || RegExp(/[\D+ ]/i).exec(name) === null) return false;
+    if (name.trim().length === 0 || RegExp(/^\D+$/i).exec(name) === null) return false;
     if (RegExp(/\d+/).exec(amount) === null || +amount <= 0) return false;
     return true;
   };
@@ -99,7 +99,11 @@ const InredientForm = () => {
             </Form.Field>
             <Form.Submit asChild>
               <Box my="2">
-                <Button style={{ width: "100%" }} type="submit" disabled={loading}>
+                <Button
+                  style={{ width: "100%" }}
+                  type="submit"
+                  disabled={loading || !formData.name || !formData.amount}
+                >
                   {loading && <Spinner loading />}
                   Crear
                 </Button>
