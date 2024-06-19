@@ -28,7 +28,7 @@ function Home() {
   const clearSearch = () => setSearchTerm("");
 
   return (
-    <Container>
+    <Container mb="3">
       <Tabs.Root defaultValue={TABS_DATA[0].name}>
         <Tabs.List>
           {TABS_DATA.map(({ name }) => (
@@ -38,9 +38,9 @@ function Home() {
           ))}
         </Tabs.List>
 
-        <Box pt="3">
+        <Box py="5">
           {TABS_DATA.map((tab) => (
-            <Tabs.Content value={tab.name}>
+            <Tabs.Content value={tab.name} key={tab.name}>
               <Box position="sticky" top="0" style={{ zIndex: 2, background: "#FFF" }} pb="4">
                 <TextField.Root
                   placeholder="Buscá si te pinta…"
