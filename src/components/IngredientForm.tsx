@@ -75,13 +75,13 @@ const InredientForm = () => {
               </Form.Control>
               <Form.Message match="valueMissing">
                 <Text size="1" color="red">
-                  Dale poné el ingrediente hippie
+                  Dale poné el ingrediente, hippie
                 </Text>
               </Form.Message>
             </Form.Field>
             <Form.Field className="FormField" name="amount">
               <Flex align="baseline" justify="between">
-                <Form.Label className="FormLabel">amount</Form.Label>
+                <Form.Label className="FormLabel">Cantidad</Form.Label>
               </Flex>
               <Form.Control asChild>
                 <TextField.Root
@@ -93,7 +93,7 @@ const InredientForm = () => {
               </Form.Control>
               <Form.Message match="valueMissing">
                 <Text size="1" color="red">
-                  Falta la amount
+                  Falta la cantidad
                 </Text>
               </Form.Message>
             </Form.Field>
