@@ -1,9 +1,10 @@
-import { Button, Flex, Table, Text } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 
 import useTableData from "../../hooks/useTableData";
 import { IngredienteDB, TableProps } from "../../types/types";
 import { INGREDIENTS_TABLE_NAME } from "../../utils/constants";
 import Loading from "../Loading";
+import TableError from "../TableError";
 import IngredientRow from "./Row";
 
 export const IngredientsIndividualTable = ({ searchTerm }: TableProps) => {
@@ -14,16 +15,7 @@ export const IngredientsIndividualTable = ({ searchTerm }: TableProps) => {
   }
 
   if (error) {
-    return (
-      <Flex justify="center" align="center" py="5" direction="column" gap="6">
-        <Text size="3" align="center" weight="medium">
-          HUBO UN ERROR WACHEX
-        </Text>
-        <Button onClick={getData} color="tomato">
-          Reintentar
-        </Button>
-      </Flex>
-    );
+    return <TableError onButtonClick={getData} />;
   }
 
   const filteredData = data.filter((r) => r.name.toLowerCase().includes(searchTerm.toLowerCase()));
