@@ -1,0 +1,27 @@
+name: Ping Supabase to Prevent Pausing
+
+on:
+  schedule:
+    - cron: "0 9 * * 1,4"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: Ping Supabase via PostgREST
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_DB_URL }}
+          SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_DB_KEY }}
+        run: |
+          response=$(curl -s \
+            -X GET "${{ env.SUPABASE_URL}}/rest/v1/" \
+            -H "apikey: ${{ env.SUPABASE_KEY}}" \
+            -H "Authorization: Bearer ${{ env.SUPABASE_KEY}}")
+          if [ -z "$response" ]; then
+            echo "Error: empty response when pinging." >&2
+            exit 1
+          fi
+          echo "Successful ping: $response"
