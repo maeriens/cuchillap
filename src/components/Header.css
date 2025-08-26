@@ -1,0 +1,13 @@
+.header-flex {
+  align-items: baseline;
+}
+
+h1.title {
+  color: black;
+}
+
+@media only screen and (max-width: 425px) {
+  .header-flex {
+    align-items: center;
+  }
+}
